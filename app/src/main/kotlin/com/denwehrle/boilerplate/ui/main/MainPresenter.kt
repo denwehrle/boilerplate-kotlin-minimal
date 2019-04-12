@@ -29,7 +29,7 @@ class MainPresenter @Inject constructor(private val dataManager: DataManager) : 
     fun getNextPage() {
         if (pagePosition < dataManager.getExampleDataSize() - 1) {
             pagePosition++
-            showData()
+            mvpView.showData(dataManager.getExampleDataByPosition(pagePosition))
         } else {
             mvpView.showError()
         }
@@ -38,13 +38,9 @@ class MainPresenter @Inject constructor(private val dataManager: DataManager) : 
     fun getPreviousPage() {
         if (pagePosition != 0) {
             pagePosition--
-            showData()
+            mvpView.showData(dataManager.getExampleDataByPosition(pagePosition))
         } else {
             mvpView.showError()
         }
-    }
-
-    private fun showData() {
-        mvpView.showData(dataManager.getExampleDataByPosition(pagePosition))
     }
 }
